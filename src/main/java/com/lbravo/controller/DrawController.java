@@ -1,6 +1,8 @@
 package com.lbravo.controller;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,6 +18,7 @@ import com.lbravo.entity.Draw;
 import com.lbravo.entity.Info;
 import com.lbravo.service.DrawService;
 import com.lbravo.service.InfoService;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
 @RequestMapping("/draws")
@@ -34,6 +37,26 @@ public class DrawController {
       List<Info> infos = infoService.findAllByIds(draw.getWinners());
       return new DrawResponse(draw.getId(), draw.getCreatedAt(), infos);
     }).toList();
+  }
+
+  @GetMapping("/do")
+  public DrawResponse doDraw(@RequestParam(defaultValue = "1") String size) {
+    List<Info> infos = infoService.getAllList();
+    DrawResponse draw = new DrawResponse();
+    draw.setInfos(new ArrayList<Info>());
+    Random rand = new Random();
+    Integer sizeInt = Integer.parseInt(size);
+    Integer i = 0;
+
+    while (i < sizeInt) {
+      int randomIndex = rand.nextInt(infos.size());
+      Info randomInfo = infos.get(randomIndex);
+      if (!draw.getInfos().contains(randomInfo)) {
+        draw.getInfos().add(randomInfo);
+        i++;
+      }
+    }
+    return draw;
   }
 
   @GetMapping("/{id}")

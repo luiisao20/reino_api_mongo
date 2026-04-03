@@ -32,7 +32,7 @@ public class SecurityConfiguration {
         .csrf(AbstractHttpConfigurer::disable)
         .httpBasic(Customizer.withDefaults())
         .authorizeHttpRequests(auth -> auth
-            .requestMatchers("/auth/login", "/products/save", "/health")
+            .requestMatchers("/auth/login", "/products/save", "/health", "/products/*")
             .permitAll()
             .requestMatchers(
                 "/users/update/**", "/users/register", "/users/delete/**", "/users/**",
@@ -40,7 +40,9 @@ public class SecurityConfiguration {
                 "/products", "/products/update/**", "/products/updateWinner/**", "/products/delete/**",
                 "/delete/all",
                 // Endpoints for draws
-                "/draws", "/draws/**", "/draws/delete/**", "/draws/save",
+                "/draws", "/draws/**", "/draws/delete/**", "/draws/save", "/draws/do",
+                // Endpoint for excel
+                "/export/excel",
                 // Endpoint to validate token
                 "/auth/validate")
             .authenticated()

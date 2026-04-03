@@ -7,7 +7,6 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,17 +19,14 @@ public class Info {
   @Id
   private String id;
 
-  @Size(min = 5)
   private String name;
 
-  @Size(min = 5)
   private String lastName;
 
   private Boolean accept = false;
 
   private Boolean winner = false;
 
-  @Size(min = 5)
   private String phone;
 
   private String activity;

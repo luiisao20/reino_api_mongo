@@ -1,9 +1,11 @@
 package com.lbravo.controller;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -25,8 +27,9 @@ public class InfoController {
   private InfoService infoService;
 
   @GetMapping
-  public List<Info> getAll(@RequestParam(defaultValue = "") String name) {
-    return infoService.getAll(name);
+  public Page<Info> getAll(@RequestParam(defaultValue = "") String name,
+      @PageableDefault(size = 10) Pageable pageable) {
+    return infoService.getAll(name, pageable);
   }
 
   @GetMapping("/{id}")
@@ -47,7 +50,6 @@ public class InfoController {
 
   @PatchMapping("/updateWinner/{id}")
   public Info updateWinner(@PathVariable String id, @RequestBody Boolean winner) {
-    System.out.println(winner);
     return infoService.updateWinnerInfo(id, winner);
   }
 

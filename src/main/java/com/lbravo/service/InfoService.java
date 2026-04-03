@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.lbravo.entity.Info;
@@ -18,12 +20,16 @@ public class InfoService {
     return infoRepository.save(product);
   }
 
-  public List<Info> getAll(String name) {
+  public Page<Info> getAll(String name, Pageable pageable) {
     if (name == null || name.isEmpty()) {
-      return infoRepository.findAllByOrderByCreatedAtDesc();
+      return infoRepository.findAllByOrderByCreatedAtDesc(pageable);
     } else {
-      return infoRepository.findByFullNameContaining(name);
+      return infoRepository.findByFullNameContaining(name, pageable);
     }
+  }
+
+  public List<Info> getAllList() {
+    return infoRepository.findAll();
   }
 
   public Optional<Info> getById(String id) {
