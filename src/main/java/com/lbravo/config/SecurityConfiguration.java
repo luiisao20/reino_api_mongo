@@ -38,7 +38,7 @@ public class SecurityConfiguration {
                 "/users/update/**", "/users/register", "/users/delete/**", "/users/**",
                 // Endpoints for products
                 "/products", "/products/update/**", "/products/updateWinner/**", "/products/delete/**",
-                "/delete/all",
+                "/products/delete/all",
                 // Endpoints for draws
                 "/draws", "/draws/**", "/draws/delete/**", "/draws/save", "/draws/do",
                 // Endpoint for excel
