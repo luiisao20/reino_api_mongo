@@ -20,7 +20,7 @@ public class ExcelExportService {
   public ByteArrayInputStream exportToExcel() throws IOException {
     List<Info> infos = infoService.getAllList();
 
-    String[] columns = { "Nombre", "Apellido", "Celular", "Actividad", "Razones", "Acepta envío de información" };
+    String[] columns = { "Nombre", "Apellido", "Edad", "Categoría", "Necesita transporte", "Pasajeros", "Asiste al almuerzo", "Confirmado", "Ganador" };
 
     try (Workbook workbook = new XSSFWorkbook();
         ByteArrayOutputStream out = new ByteArrayOutputStream()) {
@@ -47,10 +47,13 @@ public class ExcelExportService {
         Row row = sheet.createRow(rowIdx++);
         row.createCell(0).setCellValue(info.getName());
         row.createCell(1).setCellValue(info.getLastName());
-        row.createCell(2).setCellValue(info.getPhone());
-        row.createCell(3).setCellValue(info.getActivity());
-        row.createCell(4).setCellValue(String.join(", ", info.getReasons()));
-        row.createCell(5).setCellValue(info.getAccept() ? "Sí": "No");
+        row.createCell(2).setCellValue(info.getAge() != null ? info.getAge() : 0);
+        row.createCell(3).setCellValue(info.getCategory());
+        row.createCell(4).setCellValue(Boolean.TRUE.equals(info.getNeedsTransport()) ? "Sí" : "No");
+        row.createCell(5).setCellValue(info.getPassengers() != null ? info.getPassengers() : 0);
+        row.createCell(6).setCellValue(Boolean.TRUE.equals(info.getAttendsLunch()) ? "Sí" : "No");
+        row.createCell(7).setCellValue(Boolean.TRUE.equals(info.getConfirmed()) ? "Sí" : "No");
+        row.createCell(8).setCellValue(Boolean.TRUE.equals(info.getWinner()) ? "Sí" : "No");
       }
 
       workbook.write(out);

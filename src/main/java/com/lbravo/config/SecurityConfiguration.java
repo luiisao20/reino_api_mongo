@@ -45,8 +45,7 @@ public class SecurityConfiguration {
                 "/export/excel",
                 // Endpoint to validate token
                 "/auth/validate")
-            .authenticated()
-          )
+            .authenticated())
         .addFilterBefore(new JwtValidator(), BasicAuthenticationFilter.class);
 
     return http.build();
@@ -56,7 +55,8 @@ public class SecurityConfiguration {
   public CorsConfigurationSource corsConfigurationSource() {
     CorsConfiguration config = new CorsConfiguration();
     config.setAllowedOrigins(
-        List.of("http://localhost:4200", "https://reinoso-app.vercel.app/"));
+        List.of("http://localhost:4200", "https://reinoso-app.vercel.app/",
+            "https://lashed-militaristically-aryan.ngrok-free.dev"));
     config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"));
     config.setAllowedHeaders(List.of("*"));
     config.setAllowCredentials(true);

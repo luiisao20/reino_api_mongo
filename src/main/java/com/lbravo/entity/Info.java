@@ -1,7 +1,6 @@
 package com.lbravo.entity;
 
 import java.time.Instant;
-import java.util.List;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
@@ -23,15 +22,19 @@ public class Info {
 
   private String lastName;
 
-  private Boolean accept = false;
+  private Integer age;
+
+  private String category;
+
+  private Boolean needsTransport;
+
+  private Integer passengers;
+
+  private Boolean attendsLunch;
+
+  private Boolean confirmed;
 
   private Boolean winner = false;
-
-  private String phone;
-
-  private String activity;
-
-  private List<String> reasons;
 
   @CreatedDate
   private Instant createdAt;

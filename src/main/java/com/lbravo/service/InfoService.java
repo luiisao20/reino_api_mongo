@@ -51,10 +51,14 @@ public class InfoService {
     Info oldProduct = getById(id)
         .orElseThrow(() -> new RuntimeException("Info not found"));
 
-    oldProduct.setPhone(product.getPhone());
     oldProduct.setName(product.getName());
-    oldProduct.setReasons(product.getReasons());
-    oldProduct.setActivity(product.getActivity());
+    oldProduct.setLastName(product.getLastName());
+    oldProduct.setAge(product.getAge());
+    oldProduct.setCategory(product.getCategory());
+    oldProduct.setNeedsTransport(product.getNeedsTransport());
+    oldProduct.setPassengers(product.getPassengers());
+    oldProduct.setAttendsLunch(product.getAttendsLunch());
+    oldProduct.setConfirmed(product.getConfirmed());
 
     return infoRepository.save(oldProduct);
   }
